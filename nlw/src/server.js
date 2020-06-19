@@ -8,6 +8,9 @@ const db = require("./database/db");
 // configurar pasta pública
 server.use(express.static("public"));
 
+// habilitar o uso do req.body na aplicação
+server.use(express.urlencoded({ extended: true }));
+
 // utilizar template engine
 const nunjunks = require('nunjucks');
 nunjunks.configure('src/views', {
@@ -21,8 +24,42 @@ server.get("/", (req, res) => { // req = requisição (pergunta), res = resposta
 
 server.get("/create-point", (req, res) => {
     // req.query: Query Strings enviados para a URL
-    console.log(req.query);
     return res.render("create-point.html");
+});
+
+server.post("/save-point", (req, res) => {
+    // req.body: O corpo do formulário
+    // inserir dados no banco de dados
+    const query = `
+        INSERT INTO places (
+            image,
+            name,
+            address,
+            address2,
+            state,
+            city,
+            items
+        ) VALUES (?,?,?,?,?,?,?);
+    `;
+
+    const values = [
+        req.body.image,
+        req.body.name,
+        req.body.address,
+        req.body.address2,
+        req.body.state,
+        req.body.city,
+        req.body.items
+    ];
+
+    function afterInsertData(err) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log(values);
+        return res.send("ok");
+    };
+    db.run(query, values, afterInsertData);
 });
 
 server.get("/search-results", (req, res) => {

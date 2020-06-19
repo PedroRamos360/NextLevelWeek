@@ -52,7 +52,7 @@ db.serialize(() => {
 
     // db.run(query, values, afterInsertData);
 
-    // // 3 Consultar os dados da tabela
+    // 3 Consultar os dados da tabela
     // db.all(`SELECT * FROM places`, function(err, rows) {
     //     if (err) {
     //         return console.log(err);
@@ -62,7 +62,7 @@ db.serialize(() => {
     // });
 
     // 4 Deletar um dado da tabela
-    // db.run(`DELETE FROM places WHERE id = ?`, [7], function(err) {
+    // db.run(`DELETE FROM places WHERE id = ?`, [12], function(err) {
     //     if (err) {
     //         console.log(err);
     //     }
