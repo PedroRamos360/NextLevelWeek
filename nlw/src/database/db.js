@@ -62,7 +62,7 @@ db.serialize(() => {
     // });
 
     // 4 Deletar um dado da tabela
-    // db.run(`DELETE FROM places WHERE id = ?`, [12], function(err) {
+    // db.run(`DELETE FROM places`, function(err) {
     //     if (err) {
     //         console.log(err);
     //     }
